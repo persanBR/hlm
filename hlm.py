@@ -10,6 +10,13 @@ def currentprice(coin,basecurrency):
         curprice = price.json()
         return curprice[basecurrency[0:3]]
 
+def checkavgs(highavg,highvalue,curprice):
+        if (curprice >= highavg) or (curprice >= highvalue):
+                return('LOOK AT ME')
+        else:
+                return('')
+
+
 def getprice(coin,daylimit,basecurrency):
         histurl = 'https://min-api.cryptocompare.com/data/histoday?fsym='+coin+'&tsym='+basecurrency+'&e=BitTrex&limit='+daylimit+''
         price = requests.get(histurl)
@@ -32,6 +39,7 @@ def getprice(coin,daylimit,basecurrency):
         print ('High Avg: ' + str(sum(listhigh)/len(listhigh)))
         print ('Lowest Avg: ' + str(sum(listlow)/len(listlow)))
         print ('Current price: ' + str(currentprice(coin,basecurrency)))
+        print (checkavgs((sum(listhigh)/len(listhigh)),(max(listhigh)),(currentprice(coin,basecurrency))))
         print ('')
 
 def basemarket(coin):
